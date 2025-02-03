@@ -19,7 +19,11 @@ exports.createPlayer = function(uuid, username, playTime, emeralds, language) {
   return new Promise(async (resolve, reject) => {
     try {
       
-      console.log(uuid);
+      console.log("uuid: " + uuid);
+      console.log("username: " + username);
+      console.log("playTime: " + playTime);
+      console.log("emeralds: " + emeralds);
+      console.log("language: " + language);
 
       resolve("funktioniert");
     } catch (error) {
