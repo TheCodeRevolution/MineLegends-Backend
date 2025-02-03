@@ -29,12 +29,12 @@ const playerSchema = mongoose.Schema({
     },
     created_at: {
         type: Date,
-        required: true,
+        required: false,
         default: Date.now
     },
     updated_at: {
         type: Date,
-        required: true,
+        required: false,
         default: Date.now
     }
 });
