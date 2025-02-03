@@ -61,36 +61,8 @@ playerSchema.path('uuid').validate(function(value) {
     });
 }, 'UUID must be unique');
 
-// Pre-save middleware zum Aktualisieren von updated_at
-playerSchema.pre('save', function(next) {
-    this.updated_at = new Date();
-    next();
-});
-
-// Pre-update middleware
-playerSchema.pre('findOneAndUpdate', function(next) {
-    this.set({ updated_at: new Date() });
-    next();
-});
 
 
-// Methode zum Formatieren der Daten für die API
-playerSchema.methods.toAPI = function() {
-    return {
-        uuid: this.uuid,
-        username: this.username,
-        language: this.language,
-        playTime: this.playTime,
-        emeralds: this.emeralds,
-        created_at: this.created_at.toISOString(),
-        updated_at: this.updated_at.toISOString()
-    };
-};
-
-// Statische Methode zum Finden eines Spielers
-playerSchema.statics.findByUUID = function(uuid) {
-    return this.findOne({ uuid: uuid });
-};
 
 const Player = mongoose.model('Player', playerSchema);
 
