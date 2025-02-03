@@ -1,5 +1,6 @@
 'use strict';
 
+const Player = require('../models/Player.model');
 
 /**
  * Create a new Player
@@ -11,16 +12,26 @@
  * emeralds Integer Number of emeralds the Player has
  * created_at Date Creation timestamp (ISO 8601 format)
  * updated_at Date Last update timestamp (ISO 8601 format)
+ * language String Language of the Player (e.g., 'de', 'en') (optional)
  * returns BackendPlayer
  **/
-exports.createPlayer = function(uuid,username,playTime,emeralds,created_at,updated_at) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {"empty": false};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
+exports.createPlayer = function(uuid, username, playTime, emeralds, created_at, updated_at, language) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const player = new Player({
+        uuid,
+        username,
+        playTime,
+        emeralds,
+        language,
+        created_at: new Date(created_at),
+        updated_at: new Date(updated_at)
+      });
+
+      const savedPlayer = await player.save();
+      resolve(savedPlayer.toAPI());
+    } catch (error) {
+      reject(error);
     }
   });
 }
@@ -34,13 +45,16 @@ exports.createPlayer = function(uuid,username,playTime,emeralds,created_at,updat
  * returns BackendPlayer
  **/
 exports.deletePlayer = function(uuid) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {"empty": false};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
+  return new Promise(async (resolve, reject) => {
+    try {
+      const player = await Player.findOneAndDelete({ uuid: uuid });
+      if (!player) {
+        reject({ code: 404, message: 'Player not found' });
+        return;
+      }
+      resolve(player.toAPI());
+    } catch (error) {
+      reject(error);
     }
   });
 }
@@ -54,13 +68,16 @@ exports.deletePlayer = function(uuid) {
  * returns BackendPlayer
  **/
 exports.getPlayer = function(uuid) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {"empty": false};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
+  return new Promise(async (resolve, reject) => {
+    try {
+      const player = await Player.findByUUID(uuid);
+      if (!player) {
+        reject({ code: 404, message: 'Player not found' });
+        return;
+      }
+      resolve(player.toAPI());
+    } catch (error) {
+      reject(error);
     }
   });
 }
@@ -73,13 +90,12 @@ exports.getPlayer = function(uuid) {
  * returns List
  **/
 exports.getPlayers = function() {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
+  return new Promise(async (resolve, reject) => {
+    try {
+      const players = await Player.find({});
+      resolve(players.map(player => player.toAPI()));
+    } catch (error) {
+      reject(error);
     }
   });
 }
@@ -95,16 +111,38 @@ exports.getPlayers = function() {
  * emeralds Integer Number of emeralds the Player has
  * created_at Date Creation timestamp (ISO 8601 format)
  * updated_at Date Last update timestamp (ISO 8601 format)
+ * language String Language of the Player (e.g., 'de', 'en') (optional)
  * returns BackendPlayer
  **/
-exports.updatePlayer = function(uuid,username,playTime,emeralds,created_at,updated_at) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {"empty": false};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
+exports.updatePlayer = function(uuid, username, playTime, emeralds, created_at, updated_at, language) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const updateData = {
+        username,
+        playTime,
+        emeralds,
+        language,
+        created_at: new Date(created_at),
+        updated_at: new Date(updated_at)
+      };
+
+      const player = await Player.findOneAndUpdate(
+        { uuid: uuid },
+        updateData,
+        { 
+          new: true,          // Returns the updated document
+          runValidators: true // Ensures validators run on update
+        }
+      );
+
+      if (!player) {
+        reject({ code: 404, message: 'Player not found' });
+        return;
+      }
+
+      resolve(player.toAPI());
+    } catch (error) {
+      reject(error);
     }
   });
 }

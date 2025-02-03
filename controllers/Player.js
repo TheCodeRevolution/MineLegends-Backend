@@ -10,7 +10,8 @@ module.exports.createPlayer = function createPlayer (req, res, next) {
   var emeralds = req.swagger.params['emeralds'].value;
   var created_at = req.swagger.params['created_at'].value;
   var updated_at = req.swagger.params['updated_at'].value;
-  Player.createPlayer(uuid,username,playTime,emeralds,created_at,updated_at)
+  var language = req.swagger.params['language'].value;
+  Player.createPlayer(uuid,username,playTime,emeralds,created_at,updated_at,language)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -58,7 +59,8 @@ module.exports.updatePlayer = function updatePlayer (req, res, next) {
   var emeralds = req.swagger.params['emeralds'].value;
   var created_at = req.swagger.params['created_at'].value;
   var updated_at = req.swagger.params['updated_at'].value;
-  Player.updatePlayer(uuid,username,playTime,emeralds,created_at,updated_at)
+  var language = req.swagger.params['language'].value;
+  Player.updatePlayer(uuid,username,playTime,emeralds,created_at,updated_at,language)
     .then(function (response) {
       utils.writeJson(res, response);
     })

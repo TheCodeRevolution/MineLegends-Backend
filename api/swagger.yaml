@@ -59,6 +59,11 @@ paths:
         description: "Username of the Player"
         required: true
         type: "string"
+      - name: "language"
+        in: "formData"
+        description: "Language of the Player (e.g., 'de', 'en')"
+        required: false
+        type: "string"
       - name: "playTime"
         in: "formData"
         description: "Play time of the Player (in long integer format)"
@@ -124,6 +129,11 @@ paths:
         in: "formData"
         description: "Username of the Player"
         required: true
+        type: "string"
+      - name: "language"
+        in: "formData"
+        description: "Language of the Player (e.g., 'de', 'en')"
+        required: false
         type: "string"
       - name: "playTime"
         in: "formData"
@@ -197,6 +207,10 @@ definitions:
         type: "string"
         example: "player123"
         description: "Username of the player"
+      language:
+        type: "string"
+        example: "en"
+        description: "Language of the player (e.g., 'de', 'en')"
       playTime:
         type: "integer"
         format: "int64"
@@ -218,12 +232,13 @@ definitions:
         example: "2025-01-15T15:30:00Z"
         description: "Timestamp when the player was last updated"
     example:
-      emeralds: 150
-      updated_at: "2025-01-15T15:30:00Z"
-      created_at: "2025-01-01T12:00:00Z"
-      playTime: 120
       uuid: "123e4567-e89b-12d3-a456-426614174000"
       username: "player123"
+      language: "en"
+      playTime: 120
+      emeralds: 150
+      created_at: "2025-01-01T12:00:00Z"
+      updated_at: "2025-01-15T15:30:00Z"
 parameters:
   uuidParam:
     name: "uuid"

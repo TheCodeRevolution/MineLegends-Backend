@@ -4,8 +4,8 @@
   "description": "API for managing players. It allows you to create, update, delete, and retrieve players by UUID, as well as retrieve all players.",
   "main": "index.js",
   "scripts": {
-	"prestart": "npm install",
-	"start": "node index.js"
+    "prestart": "npm install",
+    "start": "node index.js"
   },
   "keywords": [
     "swagger"
@@ -14,8 +14,9 @@
   "private": true,
   "dependencies": {
     "connect": "^3.2.0",
+    "dotenv": "^16.0.3",
     "js-yaml": "^3.3.0",
-    "swagger-tools": "0.10.1",
-    "dotenv": "^16.0.3"
+    "mongoose": "^8.9.6",
+    "swagger-tools": "0.10.1"
   }
 }
