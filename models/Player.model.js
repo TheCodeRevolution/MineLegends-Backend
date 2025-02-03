@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
 
 const playerSchema = mongoose.Schema({
-    _id: {
-        type: mongoose.Schema.Types.ObjectId,
-        default: mongoose.Types.ObjectId
-    },
     uuid: {
         type: String,
         required: true,
