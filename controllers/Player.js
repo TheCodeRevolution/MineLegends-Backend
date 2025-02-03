@@ -4,26 +4,26 @@ var utils = require('../utils/writer.js');
 var Player = require('../service/PlayerService');
 
 module.exports.createPlayer = function createPlayer (req, res, next) {
+  // Log die eingehenden Parameter
+  console.log("Controller received params:");
+  console.log("uuid:", req.swagger.params['uuid'].value);
+  console.log("username:", req.swagger.params['username'].value);
+  console.log("playTime:", req.swagger.params['playTime'].value);
+  console.log("emeralds:", req.swagger.params['emeralds'].value);
+  console.log("language:", req.swagger.params['language'] ? req.swagger.params['language'].value : 'de');
 
-  console.log("aaaaaaaaaaaaaaa");
-
-  console.log("uuid: " + req.swagger.params['uuid'].value);
-  console.log("username: " + req.swagger.params['username'].value);
-  console.log("playTime: " + req.swagger.params['playTime'].value);
-  console.log("emeralds: " + req.swagger.params['emeralds'].value);
-  console.log("language: " + req.swagger.params['language'].value);
-
-  var uuid = req.swagger.params['uuid'].value;
-  var username = req.swagger.params['username'].value;
-  var playTime = req.swagger.params['playTime'].value;
-  var emeralds = req.swagger.params['emeralds'].value;
-  var language = req.swagger.params['language'].value;
-  Player.createPlayer(uuid,username,playTime,emeralds,language)
+  Player.createPlayer(
+    req.swagger.params['uuid'].value,
+    req.swagger.params['username'].value,
+    req.swagger.params['playTime'].value,
+    req.swagger.params['emeralds'].value,
+    req.swagger.params['language'] ? req.swagger.params['language'].value : 'de'
+  )
     .then(function (response) {
       utils.writeJson(res, response);
     })
     .catch(function (response) {
-      utils.writeJson(res, response);
+      utils.writeJson(res, response, 400);
     });
 };
 
