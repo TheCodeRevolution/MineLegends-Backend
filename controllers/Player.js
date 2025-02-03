@@ -4,6 +4,15 @@ var utils = require('../utils/writer.js');
 var Player = require('../service/PlayerService');
 
 module.exports.createPlayer = function createPlayer (req, res, next) {
+
+  console.log("aaaaaaaaaaaaaaa");
+
+  console.log("uuid: " + req.swagger.params['uuid'].value);
+  console.log("username: " + req.swagger.params['username'].value);
+  console.log("playTime: " + req.swagger.params['playTime'].value);
+  console.log("emeralds: " + req.swagger.params['emeralds'].value);
+  console.log("language: " + req.swagger.params['language'].value);
+
   var uuid = req.swagger.params['uuid'].value;
   var username = req.swagger.params['username'].value;
   var playTime = req.swagger.params['playTime'].value;
