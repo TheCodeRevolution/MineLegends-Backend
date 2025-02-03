@@ -76,18 +76,6 @@ paths:
         required: true
         type: "integer"
         format: "int32"
-      - name: "created_at"
-        in: "formData"
-        description: "Creation timestamp (ISO 8601 format)"
-        required: false
-        type: "string"
-        format: "date-time"
-      - name: "updated_at"
-        in: "formData"
-        description: "Last update timestamp (ISO 8601 format)"
-        required: false
-        type: "string"
-        format: "date-time"
       responses:
         "200":
           description: "OK"

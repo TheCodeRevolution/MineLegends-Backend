@@ -9,9 +9,7 @@ module.exports.createPlayer = function createPlayer (req, res, next) {
   var playTime = req.swagger.params['playTime'].value;
   var emeralds = req.swagger.params['emeralds'].value;
   var language = req.swagger.params['language'].value;
-  var created_at = req.swagger.params['created_at'].value;
-  var updated_at = req.swagger.params['updated_at'].value;
-  Player.createPlayer(uuid,username,playTime,emeralds,language,created_at,updated_at)
+  Player.createPlayer(uuid,username,playTime,emeralds,language)
     .then(function (response) {
       utils.writeJson(res, response);
     })
