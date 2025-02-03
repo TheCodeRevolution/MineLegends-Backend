@@ -18,18 +18,10 @@ const Player = require('../models/Player.model');
 exports.createPlayer = function(uuid, username, playTime, emeralds, language) {
   return new Promise(async (resolve, reject) => {
     try {
-      // Erstelle und speichere den Spieler
-      const player = new Player({
-        uuid: String(uuid),
-        username: String(username),
-        playTime: Number(playTime) || 0,
-        emeralds: Number(emeralds) || 0,
-        language: language || 'de'
-      });
-      const savedPlayer = await player.save();
       
-      // Konvertiere zu API Format und sende zurück
-      resolve(savedPlayer.toAPI());
+      console.log(uuid, username, playTime, emeralds, language);
+
+      resolve("funktioniert");
     } catch (error) {
       console.error('Create Player Error:', error);  // Logging für Debugging
       reject(error);
