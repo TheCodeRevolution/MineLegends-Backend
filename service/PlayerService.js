@@ -70,12 +70,8 @@ exports.deletePlayer = function(uuid) {
 exports.getPlayer = function(uuid) {
   return new Promise(async (resolve, reject) => {
     try {
-      const player = await Player.findByUUID(uuid);
-      if (!player) {
-        resolve(null);
-        return;
-      }
-      resolve(player.toAPI());
+      const player = await Player.findOne({ uuid: uuid });
+      resolve(player);
     } catch (error) {
       reject(error);
     }
