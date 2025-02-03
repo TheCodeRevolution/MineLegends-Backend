@@ -22,7 +22,15 @@ exports.createPlayer = function(uuid, username, playTime, emeralds, language) {
   console.log("emeralds: " + emeralds);
   console.log("language: " + language);
 
-  return null;
+  var newPlayer = new Player({
+    uuid: uuid,
+    username: username,
+    playTime: playTime,
+    emeralds: emeralds,
+    language: language
+  });
+
+  return newPlayer.save();
 }
 
 
