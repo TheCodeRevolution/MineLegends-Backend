@@ -16,30 +16,13 @@ const Player = require('../models/Player.model');
  * returns BackendPlayer
  **/
 exports.createPlayer = function(uuid, username, playTime, emeralds, language) {
-  return new Promise(async (resolve, reject) => {
-    try {
-      console.log("Service received values:");
-      console.log("uuid:", uuid);
-      console.log("username:", username);
-      console.log("playTime:", playTime);
-      console.log("emeralds:", emeralds);
-      console.log("language:", language);
+  console.log("uuid: " + uuid);
+  console.log("username: " + username);
+  console.log("playTime: " + playTime);
+  console.log("emeralds: " + emeralds);
+  console.log("language: " + language);
 
-      const player = new Player({
-        uuid: uuid,
-        username: username,
-        playTime: playTime,
-        emeralds: emeralds,
-        language: language || 'de'
-      });
-
-      const savedPlayer = await player.save();
-      resolve(savedPlayer.toAPI());
-    } catch (error) {
-      console.error('Create Player Error:', error);
-      reject(error);
-    }
-  });
+  return null;
 }
 
 
