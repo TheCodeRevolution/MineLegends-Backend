@@ -72,7 +72,7 @@ exports.getPlayer = function(uuid) {
     try {
       const player = await Player.findByUUID(uuid);
       if (!player) {
-        reject({ code: 404, message: 'Player not found' });
+        resolve(null);
         return;
       }
       resolve(player.toAPI());
