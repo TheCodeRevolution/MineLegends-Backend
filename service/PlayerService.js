@@ -18,19 +18,25 @@ const Player = require('../models/Player.model');
 exports.createPlayer = function(uuid, username, playTime, emeralds, created_at, updated_at, language) {
   return new Promise(async (resolve, reject) => {
     try {
-      const player = new Player({
-        uuid,
-        username,
-        playTime,
-        emeralds,
-        language,
-        created_at: new Date(created_at),
-        updated_at: new Date(updated_at)
-      });
+      // Validiere und konvertiere die Eingabedaten
+      const playerData = {
+        uuid: String(uuid),
+        username: String(username),
+        playTime: Number(playTime) || 0,
+        emeralds: Number(emeralds) || 0,
+        language: language || 'de',
+        created_at: created_at ? new Date(created_at) : new Date(),
+        updated_at: updated_at ? new Date(updated_at) : new Date()
+      };
 
+      // Erstelle und speichere den Spieler
+      const player = new Player(playerData);
       const savedPlayer = await player.save();
+      
+      // Konvertiere zu API Format und sende zurück
       resolve(savedPlayer.toAPI());
     } catch (error) {
+      console.error('Create Player Error:', error);  // Logging für Debugging
       reject(error);
     }
   });
