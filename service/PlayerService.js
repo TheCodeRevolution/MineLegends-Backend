@@ -59,14 +59,7 @@ exports.deletePlayer = function (uuid) {
  * returns BackendPlayer
  **/
 exports.getPlayer = function (uuid) {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const player = await Player.findOne({ uuid: uuid });
-      resolve(player ? player.toAPI() : null);
-    } catch (error) {
-      reject(error);
-    }
-  });
+  return Player.findOne({uuid: uuid})
 }
 
 
