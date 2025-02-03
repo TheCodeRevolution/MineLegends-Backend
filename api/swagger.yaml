@@ -79,13 +79,13 @@ paths:
       - name: "created_at"
         in: "formData"
         description: "Creation timestamp (ISO 8601 format)"
-        required: true
+        required: false
         type: "string"
         format: "date-time"
       - name: "updated_at"
         in: "formData"
         description: "Last update timestamp (ISO 8601 format)"
-        required: true
+        required: false
         type: "string"
         format: "date-time"
       responses:
@@ -150,13 +150,13 @@ paths:
       - name: "created_at"
         in: "formData"
         description: "Creation timestamp (ISO 8601 format)"
-        required: true
+        required: false
         type: "string"
         format: "date-time"
       - name: "updated_at"
         in: "formData"
         description: "Last update timestamp (ISO 8601 format)"
-        required: true
+        required: false
         type: "string"
         format: "date-time"
       responses:
