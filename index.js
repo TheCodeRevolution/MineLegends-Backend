@@ -31,6 +31,8 @@ var swaggerDoc = jsyaml.safeLoad(spec);
 
 app.use(require('./middleware/allowcrossorigin'));
 
+console.log("aaaaaaaaaaaaaaa");
+
 // Initialize the Swagger middleware
 swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
   // Add API key verification before other middleware
