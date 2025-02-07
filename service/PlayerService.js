@@ -2,13 +2,15 @@
 
 const Player = require('../models/Player.model');
 
-exports.createPlayer = function (uuid, username, playTime, emeralds, language) {
+exports.createPlayer = function (uuid,username,playTime,emeralds,serverName,online,language) {
   var newPlayer = new Player({
     uuid: uuid,
     username: username,
     playTime: playTime,
     emeralds: emeralds,
-    language: language
+    language: language,
+    serverName: serverName,
+    online: online
   });
 
   return newPlayer.save();
@@ -30,13 +32,15 @@ exports.getPlayers = function () {
 }
 
 
-exports.updatePlayer = function (uuid, username, playTime, emeralds, language) {
+exports.updatePlayer = function (uuid,username,playTime,emeralds,serverName,online,language) {
   var query = { uuid: uuid };
   const update = {
     username,
     playTime,
     emeralds,
     language,
+    serverName,
+    online
   };
 
   return Player.findOneAndUpdate(query, update, { useFindAndModify: false });

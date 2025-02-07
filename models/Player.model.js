@@ -27,6 +27,17 @@ const playerSchema = mongoose.Schema({
         required: true,
         index: true
     },
+    serverName: {      // Neues Feld
+        type: String,
+        required: true,
+        index: true
+    },
+    online: {         // Neues Feld
+        type: Boolean,
+        required: true,
+        default: false,
+        index: true
+    },
     created_at: {
         type: Date,
         required: false,
@@ -48,6 +59,10 @@ playerSchema.path('username').validate(function(username) {
     return username.length;
 }, 'Username cannot be blank');
 
+playerSchema.path('serverName').validate(function(serverName) {
+    return serverName.length;
+}, 'Server name cannot be blank');
+
 // Unique UUID Validierung
 playerSchema.path('uuid').validate(function(value) {
     return this.constructor.findOne({ uuid: value }).exec().then((player) => {
@@ -60,8 +75,6 @@ playerSchema.path('uuid').validate(function(value) {
         return true;
     });
 }, 'UUID must be unique');
-
-
 
 
 const Player = mongoose.model('Player', playerSchema);

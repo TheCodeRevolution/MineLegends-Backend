@@ -76,6 +76,16 @@ paths:
         required: true
         type: "integer"
         format: "int32"
+      - name: "serverName"
+        in: "formData"
+        description: "Name of the server on which the player is located"
+        required: true
+        type: "string"
+      - name: "online"
+        in: "formData"
+        description: "Online status of the player (true if online, false otherwise)"
+        required: true
+        type: "boolean"
       responses:
         "200":
           description: "OK"
@@ -135,6 +145,16 @@ paths:
         required: true
         type: "integer"
         format: "int32"
+      - name: "serverName"
+        in: "formData"
+        description: "Name of the server on which the player is located"
+        required: true
+        type: "string"
+      - name: "online"
+        in: "formData"
+        description: "Online status of the player (true if online, false otherwise)"
+        required: true
+        type: "boolean"
       responses:
         "200":
           description: "OK"
@@ -170,7 +190,9 @@ definitions:
     required:
     - "created_at"
     - "emeralds"
+    - "online"
     - "playTime"
+    - "serverName"
     - "updated_at"
     - "username"
     - "uuid"
@@ -197,6 +219,14 @@ definitions:
         format: "int32"
         example: 150
         description: "Number of emeralds the player has"
+      serverName:
+        type: "string"
+        example: "Server1"
+        description: "Name of the server on which the player is located"
+      online:
+        type: "boolean"
+        example: true
+        description: "Online status of the player"
       created_at:
         type: "string"
         format: "date-time"
@@ -213,6 +243,8 @@ definitions:
       language: "en"
       playTime: 120
       emeralds: 150
+      serverName: "Server1"
+      online: true
       created_at: "2025-01-01T12:00:00Z"
       updated_at: "2025-01-15T15:30:00Z"
 parameters:
