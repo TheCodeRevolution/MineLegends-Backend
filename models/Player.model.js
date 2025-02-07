@@ -29,8 +29,7 @@ const playerSchema = mongoose.Schema({
     },
     serverName: {      
         type: String,
-        required: false,  // Geändert zu false
-        default: null,    // Default-Wert hinzugefügt
+        required: true,
         index: true
     },
     online: {         
