@@ -59,11 +59,6 @@ playerSchema.path('username').validate(function(username) {
     return username.length;
 }, 'Username cannot be blank');
 
-// Validierung für serverName nur wenn ein Wert vorhanden ist
-playerSchema.path('serverName').validate(function(serverName) {
-    if (serverName === null) return true;
-    return serverName.length > 0;
-}, 'Server name cannot be blank when provided');
 
 // Unique UUID Validierung
 playerSchema.path('uuid').validate(function(value) {
