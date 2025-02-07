@@ -27,12 +27,13 @@ const playerSchema = mongoose.Schema({
         required: true,
         index: true
     },
-    serverName: {      // Neues Feld
+    serverName: {      
         type: String,
-        required: true,
+        required: false,  // Geändert zu false
+        default: null,    // Default-Wert hinzugefügt
         index: true
     },
-    online: {         // Neues Feld
+    online: {         
         type: Boolean,
         required: true,
         default: false,
@@ -59,9 +60,11 @@ playerSchema.path('username').validate(function(username) {
     return username.length;
 }, 'Username cannot be blank');
 
+// Validierung für serverName nur wenn ein Wert vorhanden ist
 playerSchema.path('serverName').validate(function(serverName) {
-    return serverName.length;
-}, 'Server name cannot be blank');
+    if (serverName === null) return true;
+    return serverName.length > 0;
+}, 'Server name cannot be blank when provided');
 
 // Unique UUID Validierung
 playerSchema.path('uuid').validate(function(value) {
@@ -75,7 +78,6 @@ playerSchema.path('uuid').validate(function(value) {
         return true;
     });
 }, 'UUID must be unique');
-
 
 const Player = mongoose.model('Player', playerSchema);
 
